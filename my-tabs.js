@@ -8,9 +8,10 @@ $(document).ready(function () {
 
 $(".my-tabs").click(function(){
     var tab_group = $(this).data('rel');
-
-    $(".my-tabs[data-rel='"+ tab_group +"']").removeClass("active");
-    $(this).addClass("active");
-    $(".my-tabs-content[data-rel='"+ tab_group +"']").hide()
-    $("#"  + $(this).attr("data-content")).fadeIn();
+    if($(this).siblings().length > 0){
+      $(".my-tabs[data-rel='"+ tab_group +"']").removeClass("active");
+      $(this).addClass("active");
+      $(".my-tabs-content[data-rel='"+ tab_group +"']").hide()
+      $("#"  + $(this).attr("data-content")).fadeIn();
+    }
 });
