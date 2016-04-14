@@ -1,2 +1,3 @@
-# my-tabs
-Tab pannels
+# js-snippets
+
+short js/jquery resources.
