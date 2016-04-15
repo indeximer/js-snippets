@@ -28,8 +28,17 @@ $(document).ready(function () {
     }
 
     google.maps.event.addDomListener( window, 'load', initialize );
+    
+    jQuery( document ).on( 'change', '.select-map', function () {
+        var latlngzoom = jQuery( this ).val().split( '|' );        
+        var newzoom = 1 * latlngzoom[ 2 ],
+            newlat = 1 * latlngzoom[ 0 ],
+            newlng = 1 * latlngzoom[ 1 ];
+        map.setZoom( newzoom );
+        map.setCenter( { lat: newlat, lng: newlng } ); 
+    } );
 
-    jQuery( document ).on( 'click', 'ul.list-map-locations li', function () {
+    /*jQuery( document ).on( 'click', 'ul.list-map-locations li', function () {
         $('ul.list-map-locations li').removeClass('active');
         $(this).addClass('active');
         var latlngzoom = jQuery( this ).data("coordinates").split( '|' );
@@ -38,7 +47,7 @@ $(document).ready(function () {
             newlng = 1 * latlngzoom[ 1 ];
         map.setZoom( newzoom );
         map.setCenter( { lat: newlat, lng: newlng } );
-    } );
+    } );*/
 
     /************** MAP ******************
      **************************************/
