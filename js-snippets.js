@@ -71,6 +71,10 @@ $(document).ready(function () {
     $('#btn-load-more').click(function () {
         atual= (atual + load <= size_li) ? atual + load : size_li;
         $('.load-more li:lt('+atual+')').slideDown();
+        if(size_li == atual){
+          //esconde botão se não tiver mais itens pra mostrar
+          $('#btn-load-more').hide(); 
+        }
     });
     //loadMore
 });//document.ready
