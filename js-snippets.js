@@ -3,44 +3,47 @@ $(document).ready(function () {
   /***************************************
    *************** MAP ******************/
 
-    $.getScript("//maps.googleapis.com/maps/api/js", function(){
+   //maps
+var map;
+$.getScript("//maps.googleapis.com/maps/api/js?key=AIzaSyCKLLzMdZ77CoYXzKSXvjBLCDHlObR3htg", function(){
 
-        var map;
-
+    if($('#selectlocation').length){
+        
         function initialize () {
 
-            var latlng = $(".list-map-locations li:first").data("coordinates").split( '|' );
+            var latlng = $("#selectlocation option:selected").val().split( '|' );
 
             map = new google.maps.Map( document.getElementById( 'map-canvas' ), {
                 zoom: 16,
                 scrollwheel: false,
                 center: { lat: 1 * latlng[0] , lng: 1 * latlng[1] }
             } );
-            markerData.forEach( function ( data ) {
-                var newmarker = new google.maps.Marker( {
-                    map: map,
-                    position: { lat: data.lat, lng: data.lng },
-                    title: data.name
-                } );
-                jQuery( "#selectlocation" ).append( '<option value="' + [ data.lat, data.lng, data.zoom ].join( '|' ) + '">' + data.name + '</option>' );
-            } );
 
+            var newmarker = new google.maps.Marker( {
+                map: map,
+                position: { lat: 1 * latlng[0] , lng: 1 * latlng[1] }
+            } );
+        
         }
 
         google.maps.event.addDomListener( window, 'load', initialize );
 
-        jQuery( document ).on( 'click', 'ul.list-map-locations li', function () {
-            $('ul.list-map-locations li').removeClass('active');
-            $(this).addClass('active');
-            var latlngzoom = jQuery( this ).data("coordinates").split( '|' );
+        jQuery( document ).on( 'change', '#selectlocation', function () {
+            var latlngzoom = $("#selectlocation option:selected").val().split( '|' );
             var newzoom = 1 * latlngzoom[ 2 ],
-            newlat = 1 * latlngzoom[ 0 ],
-            newlng = 1 * latlngzoom[ 1 ];
+                newlat = 1 * latlngzoom[ 0 ],
+                newlng = 1 * latlngzoom[ 1 ];
             map.setZoom( newzoom );
             map.setCenter( { lat: newlat, lng: newlng } );
+            var newmarker = new google.maps.Marker( {
+                map: map,
+                position: { lat: 1 * latlngzoom[ 0 ] , lng: 1 * latlngzoom[ 1 ] }
+            } );
         } );
 
-    });
+    }
+
+});//maps
 
 // Sem select
 
