@@ -139,3 +139,17 @@ $(".my-tabs").click(function(){
 });
 // my-tabs
 
+//fechar pop-up no esc
+$(document).keydown(function(e) {
+    if (e.keyCode == 27) {
+        $(".mask").fadeOut();
+    }
+});
+
+//fechar pop-up
+$(".mask, .btn-pop-close").on("click",function(){
+    $(".mask").fadeOut();
+}).on("click", ".pop-up-content", function(event){
+    event.stopPropagation();
+});
+
