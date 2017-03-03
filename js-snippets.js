@@ -139,16 +139,22 @@ $(".my-tabs").click(function(){
 });
 // my-tabs
 
+//função para abrir pop-up
+function popUp(selector){
+    $("body,html").addClass("scroll-lock");
+    selector.fadeIn("fast");
+}
 //fechar pop-up no esc
 $(document).keydown(function(e) {
     if (e.keyCode == 27) {
         $(".mask").fadeOut();
+        $("body,html").removeClass("scroll-lock");
     }
 });
-
 //fechar pop-up
 $(".mask, .btn-pop-close").on("click",function(){
     $(".mask").fadeOut();
+    $("body,html").removeClass("scroll-lock");
 }).on("click", ".pop-up-content", function(event){
     event.stopPropagation();
 });
