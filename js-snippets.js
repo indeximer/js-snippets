@@ -139,23 +139,28 @@ $(".my-tabs").click(function(){
 });
 // my-tabs
 
-//função para abrir pop-up
+// Modals
 function popUp(selector){
-    $("body,html").addClass("scroll-lock");
-    selector.fadeIn("fast");
+    $("body,html").addClass("scroll-lock")
+    selector.fadeIn("fast")
 }
+function popClose(){
+    $(".moda-overlay").fadeOut()
+    $("body,html").removeClass("scroll-lock")
+}
+$('.btn-open-modal').on('click', function(){
+    const el = $(this).data('target')
+    popUp($(el))
+})
 //fechar pop-up no esc
 $(document).keydown(function(e) {
     if (e.keyCode == 27) {
-        $(".mask").fadeOut();
-        $("body,html").removeClass("scroll-lock");
+        popClose()
     }
-});
-//fechar pop-up
-$(".mask, .btn-pop-close").on("click",function(){
-    $(".mask").fadeOut();
-    $("body,html").removeClass("scroll-lock");
+})
+$(".moda-overlay, .btn-pop-close").on("click",function(){
+    popClose()
 }).on("click", ".pop-up-content", function(event){
-    event.stopPropagation();
-});
+    event.stopPropagation()
+})
 
